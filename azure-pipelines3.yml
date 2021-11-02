@@ -1,5 +1,5 @@
 trigger:
-- main
+- none
 
 
 stages:
@@ -18,7 +18,7 @@ stages:
             - checkout: none
             - task: AzureCLI@2
               inputs:
-                azureSubscription: 'test'
+                azureSubscription: 'arm_auto'
                 scriptType: ps
                 scriptLocation: inlineScript
                 inlineScript: |
