@@ -1,0 +1,23 @@
+name: test-pipeline
+
+trigger:
+- master
+
+stages:
+- stage: Test
+  displayName: Install ontwikkel omgeving
+  jobs:
+  - job: testservconn
+    pool:
+      vmImage: windows-latest
+    steps:
+      - checkout: none
+
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: 'test'
+          scriptType: ps
+          scriptLocation: inlineScript
+          inlineScript: |
+            Write-Host "Test me"
+            az account show --output table
