@@ -1,0 +1,20 @@
+name: test-pipeline
+
+trigger:
+- master
+
+jobs:
+ - job: testservconn
+   displayName: Deploy azure o-environment
+   pool:
+     vmImage: windows-latest
+   steps:
+   - checkout: none
+   - task: AzureCLI@2
+     inputs:
+       azureSubscription: 'test'
+       scriptType: ps
+       scriptLocation: inlineScript
+       inlineScript: |
+         Write-Host "Test me"
+         az account show --output table
