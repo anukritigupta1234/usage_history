@@ -1,0 +1,26 @@
+trigger:
+- main
+
+
+stages:
+- stage: Test
+  displayName: Install ontwikkel omgeving
+  jobs:
+  - deployment: testservconn
+    displayName: Deploy azure o-environment
+    environment: 'MijnPFZW-Azure-CDN-Ontwikkel'
+    pool:
+      vmImage: windows-latest
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - checkout: none
+            - task: AzureCLI@2
+              inputs:
+                azureSubscription: 'test'
+                scriptType: ps
+                scriptLocation: inlineScript
+                inlineScript: |
+                  Write-Host "Test me"
+                  az account show --output table
